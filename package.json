@@ -1,0 +1,31 @@
+{
+  "name": "@gfoust/flowcmd",
+  "version": "1.0.0",
+  "description": "Command line interpreter for OverFlow charts",
+  "main": "lib/index.js",
+  "scripts": {
+    "compile": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "flowcmd": "./lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gfoust/flowcmd.git"
+  },
+  "author": "Gabriel Foust",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gfoust/flowcmd/issues"
+  },
+  "homepage": "https://github.com/gfoust/flowcmd#readme",
+  "dependencies": {
+    "xmldom": "^0.1.27"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.24",
+    "@types/xmldom": "^0.1.29",
+    "typescript": "^2.4.2"
+  }
+}
