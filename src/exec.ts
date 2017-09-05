@@ -1,12 +1,14 @@
 import { Dictionary } from "./util";
 import * as ast from "./ast";
 import { parse } from "./parse";
-import readline = require("readline");
+import { ReadLine } from "./readline";
 import xml = require("xmldom");
 
 export function exec(flowchart: Element) {
   const stdout = process.stdout;
-
+  const stdin = process.stdin;
+  const readline = new ReadLine();
+  stdin.pipe(readline);
 
   const env = {
     types: { } as Dictionary<string>,
@@ -32,7 +34,7 @@ export function exec(flowchart: Element) {
     }
   }
 
-
+  queue((stdin as any).destroy.bind(stdin))
   execSequence(findFirstChild(flowchart, "sequence"));
 
   return;
@@ -59,13 +61,7 @@ export function exec(flowchart: Element) {
       stdout.write(String(expr.eval(env.context)));
     }
 
-    const stdin = readline.createInterface({
-      input: process.stdin,
-      output: null
-    });
-
-    stdin.question("", line => {
-      stdin.close();
+    readline.next(line => {
       const variable = findFirstChild(input, "variable");
       const name = variable.firstChild.nodeValue;
       if (env.types[name] === "double") {
